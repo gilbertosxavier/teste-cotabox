@@ -1,7 +1,4 @@
 <template>
-  <div>
-    
-  </div>
   <table class="data-table">
     <thead>
       <tr>

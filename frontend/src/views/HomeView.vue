@@ -1,9 +1,21 @@
 <template>
-  <div>
-    <ParticipantForm :onAdd="addParticipant"/>
-    <ParticipantsTable :participants="participants"/>
-    <ParticipationChart :participants="participants"/>
-  </div>
+
+    <header>
+      <ParticipantForm :onAdd="addParticipant"/>
+    </header>
+
+    <main>
+      <section>    
+        <h1>DATA</h1>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+      </section>
+
+      <section>
+        <ParticipantsTable :participants="participants"/>
+        <ParticipationChart :participants="participants"/>
+      </section>
+    </main>
+    
 </template>
 
 <script>
