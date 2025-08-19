@@ -73,12 +73,12 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;
+  gap: 20px;
 }
 
 .chart-container {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
 }
 
 .legend ul {
@@ -89,7 +89,7 @@ export default {
   display: flex;
   align-items: center;
   margin-bottom: 8px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
 }
 
