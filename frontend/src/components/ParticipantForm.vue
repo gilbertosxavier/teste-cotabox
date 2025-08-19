@@ -1,0 +1,68 @@
+<template>
+  <form @submit.prevent="submit">
+    <input v-model="firstName" type="text" placeholder="First name" required>
+    <input v-model="lastName" type="text" placeholder="Last name" required>
+    <input v-model.number="participation" type="number" placeholder="Participation" required min="1" max="100">
+    <button type="submit">SEND</button>
+  </form>
+</template>
+
+<script>
+export default {
+  props: ['onAdd'],
+  data() {
+    return {
+      firstName: '',
+      lastName: '',
+      participation: null,
+    }
+  },
+  methods: {
+    submit() {
+      this.onAdd({
+        first_name: this.firstName,
+        last_name: this.lastName,
+        participation: this.participation,
+      });
+      this.firstName = '';
+      this.lastName = '';
+      this.participation = null;
+    }
+  }
+}
+</script>
+
+<style scoped>
+form {
+  background-color: #00b8e2;
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+input{
+
+  height: 40px;
+  width: 100%;
+  max-width: 250px;
+  padding-inline: 10px;
+}
+
+button{
+  height: 40px;
+  padding-inline: 30px;
+  cursor: pointer;
+  border: 1px solid #fff;
+  background-color: #00b8e2;
+  color: #fff;
+  font-weight: bold;
+}
+
+button:hover{
+  background-color: #1fcbf1;
+}
+
+</style>
