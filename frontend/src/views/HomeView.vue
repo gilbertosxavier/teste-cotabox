@@ -80,11 +80,13 @@ main{
 
 .chart {
   width: 100%;
+  max-width: 1080px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   margin: 16px;
   padding: 18px;
+  gap: 18px;
 }
 
 
