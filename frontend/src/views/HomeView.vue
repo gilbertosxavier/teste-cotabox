@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import api from '../services/api';
 
 import ParticipantForm from '../components/ParticipantForm.vue';
 import ParticipantsTable from '../components/ParticipantsTable.vue';
@@ -38,7 +38,7 @@ export default {
   methods: {
     async fetchParticipants() {
       try {
-        const res = await axios.get('http://localhost:3000/api/participants');
+        const res = await api.get('/participants');
         this.participants = res.data;
       } catch (err) {
         console.error(err);
@@ -46,7 +46,7 @@ export default {
     },
     async addParticipant(participant) {
       try {
-        await axios.post('http://localhost:3000/api/participants', participant);
+        await api.post('/participants', participant);
         this.fetchParticipants();
       } catch (err) {
         alert(err.response?.data?.message || 'Erro ao adicionar participante.');
