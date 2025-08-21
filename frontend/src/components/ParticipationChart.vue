@@ -156,16 +156,15 @@ export default {
   }
 
   .legend ul {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-around;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 20px ;
 }
 
 .legend li {
   font-size: 11px;
   flex-direction: column;
+  align-items: center;
 }
 }
 </style>
