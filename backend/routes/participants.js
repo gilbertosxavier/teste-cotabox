@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Participant = require('../models/participant');
 
-
+//rota para buscar todos os participantes
 router.get('/', async (req, res) => {
   try {
     const participants = await Participant.find();
@@ -12,6 +12,8 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+//rota para adicionar um novo participante
 router.post('/', async (req, res) => {
   const { first_name, last_name, participation } = req.body;
 
@@ -34,5 +36,39 @@ router.post('/', async (req, res) => {
     res.status(500).json({ message: 'Erro ao salvar o participante.' });
   }
 });
+
+
+//rota para editar a participação de um participante
+router.patch('/:id', async (req, res) =>{
+  const {id} = req.params;
+  const {participation} = req.body;
+  try {
+    const participant = await Participant.findById(id);
+    if (!participant) {
+      return res.status(404).json({ message: 'Participante não encontrado.' });
+    }
+    participant.participation = participation;
+    await participant.save();
+    res.status(200).json(participant);
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao atualizar o participante.' });
+  }
+});
+
+//rota para excluir um participante
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const participant = await Participant.findByIdAndDelete(id);
+    if (!participant) {
+      return res.status(404).json({ message: 'Participante não encontrado.' });
+    }
+    res.status(200).json({ message: 'Participante excluido com sucesso.' });
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao excluir o participante.' });
+  }
+});
+
+
 
 module.exports = router;
