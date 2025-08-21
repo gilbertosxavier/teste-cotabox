@@ -9,15 +9,23 @@
     <div class="legend">
       <ul>
         <li v-for="(participant, index) in participants" :key="participant.id"
-        :style="{color: colors[index % colors.length] }"
+        :style="{color: getColor(index)}"
         
         >
           <span
             class="color-box"
-            :style="{backgroundColor: colors[index % colors.length] }"
+            :style="{backgroundColor: getColor(index)}"
           ></span>
 
           {{ participant.first_name }} {{ participant.last_name }} - {{ participant.participation }} %
+        </li>
+
+        <li v-if="totalParticipation < 100">
+          <span
+            class="color-box"
+            :style="{backgroundColor: '#d8d8d8'}"
+          ></span>
+          Empty - {{ 100 - totalParticipation }} %
         </li>
       </ul>
     </div>
@@ -33,8 +41,12 @@ export default {
   data(){
     return {
       chart: null,
-      colors: ['#2d97de', '#16ba9a', '#e94a35', '#9c56b8', '#bdc3c7' ]
     };
+  },
+  computed: {
+    totalParticipation() {
+      return this.participants.reduce((total, percent) => total + percent.participation, 0);
+    }
   },
   watch: {
     participants: {
@@ -46,10 +58,32 @@ export default {
     this.renderChart();
   },
   methods: {
+    generateColorHSL(index) {
+      const hue = (index * 137.508) % 360;
+      return `hsl(${hue}, 100%, 50%)`;
+    },
+    getColor(index) {
+     const baseColors = ['#2d97de', '#16ba9a', '#e94a35', '#9c56b8', '#bdc3c7'];
+     if (index < baseColors.length) {
+       return baseColors[index];
+     }
+       return this.generateColorHSL(index); 
+    },
     renderChart() {
       if (this.chart) this.chart.destroy();
       const context = this.$refs.chartCanvas.getContext('2d');
       const data = this.participants.map(percent => percent.participation);
+
+      if (this.totalParticipation < 100) {
+        data.push(100 - this.totalParticipation);
+      }
+
+      const colors = this.participants.map((_, index) => this.getColor(index));
+
+      if (this.totalParticipation < 100) {
+        colors.push('#d8d8d8');
+      }
+
       this.chart = new Chart(context, {
         type: 'doughnut',
         data: {
