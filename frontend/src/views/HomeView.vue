@@ -89,5 +89,11 @@ main{
   gap: 18px;
 }
 
+@media (max-width: 890px) {
+  .chart {
+    flex-direction: column;
+  }
+}
+
 
 </style>

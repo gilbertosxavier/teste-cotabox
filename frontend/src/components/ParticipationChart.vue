@@ -68,12 +68,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped> 
 .chart-wrapper{
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
+  margin-block: 16px;
 }
 
 .chart-container {
@@ -88,6 +89,7 @@ export default {
 .legend li {
   display: flex;
   align-items: center;
+  gap: 8px;
   margin-bottom: 8px;
   font-size: 14px;
   font-weight: bold;
@@ -100,4 +102,35 @@ export default {
   margin-right: 8px;
 }
 
+
+@media (max-width: 900px) {
+  .chart-container{
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 525px) {
+  .chart-wrapper{
+    flex-direction: column-reverse;
+  }
+
+  .chart-container{
+    width: 200px;
+    height: 200px;
+  }
+
+  .legend ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.legend li {
+  font-size: 11px;
+  flex-direction: column;
+}
+}
 </style>

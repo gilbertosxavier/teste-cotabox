@@ -41,6 +41,7 @@ form {
   align-items: center;
   justify-content: center;
   gap: 10px;
+  padding-block: 16px;
 }
 
 input{
@@ -49,6 +50,7 @@ input{
   width: 100%;
   max-width: 250px;
   padding-inline: 10px;
+  outline: none;
 }
 
 button{
@@ -63,6 +65,20 @@ button{
 
 button:hover{
   background-color: #1fcbf1;
+}
+
+@media (max-width: 525px) {
+  form{
+    flex-direction: column;
+  }
+
+  input{
+    max-width: 80%;
+  }
+
+  button {
+    width: 80%;
+  }
 }
 
 </style>
