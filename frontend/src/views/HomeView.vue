@@ -20,7 +20,9 @@
           <p class="no-data">You do not have any registered data yet.</p>
         </div>
         <template v-else>
-          <ParticipantsTable :participants="participants"/>
+          <ParticipantsTable :participants="participants"
+            @edit="handleEdit"
+            @delete="handleDelete"/>
           <ParticipationChart :participants="participants"/>
         </template>
       </section>
@@ -81,6 +83,20 @@ export default {
       } catch (err) {
         alert(err.response?.data?.message || 'Erro ao adicionar participante.');
       }
+    },
+    async handleEdit(participant) {
+      console.log('Edit participant:', participant);
+    },
+    async handleDelete(id) {
+      try {
+        await api.delete(`/participants/${id}`);
+        this.fetchParticipants();
+      } catch (err) {
+        alert(err.response?.data?.message || 'Erro ao deletar participante.');
+      }
+    }, 
+    async handleDelete(id) {
+      console.log('Delete participant:', id);
     }
   }
 }
