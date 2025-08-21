@@ -89,7 +89,7 @@ export default {
         data: {
           datasets: [{ 
             data,
-            backgroundColor: this.colors
+            backgroundColor: colors
           }]
         },
         options: {
@@ -123,7 +123,7 @@ export default {
 .legend li {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
   margin-bottom: 8px;
   font-size: 14px;
   font-weight: bold;
@@ -132,8 +132,9 @@ export default {
 .color-box {
   width: 26px;
   height: 26px;
+  flex: 0 0 26px;
   border-radius: 6px;
-  margin-right: 8px;
+  display: inline-block;
 }
 
 
