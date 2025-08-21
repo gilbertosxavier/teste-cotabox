@@ -1,10 +1,13 @@
 <template>
-  <form @submit.prevent="submit">
-    <input v-model="firstName" type="text" placeholder="First name" required>
-    <input v-model="lastName" type="text" placeholder="Last name" required>
-    <input v-model.number="participation" type="number" placeholder="Participation" required min="1" max="100">
-    <button type="submit">SEND</button>
-  </form>
+  <header>
+    <form @submit.prevent="submit">
+      <input v-model="firstName" type="text" placeholder="First name" required>
+      <input v-model="lastName" type="text" placeholder="Last name" required>
+      <input v-model.number="participation" type="number" placeholder="Participation" required min="1" max="100">
+      <button type="submit">SEND</button>
+    </form>
+  </header>
+
 </template>
 
 <script>
@@ -33,15 +36,24 @@ export default {
 </script>
 
 <style scoped>
-form {
-  background-color: #00b8e2;
+
+header {
   width: 100%;
-  height: 150px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00b8e2;
+  padding-block: 16px;
+}
+
+form {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding-block: 16px;
 }
 
 input{

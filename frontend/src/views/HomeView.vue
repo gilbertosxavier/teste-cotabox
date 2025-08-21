@@ -1,8 +1,8 @@
 <template>
 
-    <header>
+
       <ParticipantForm :onAdd="addParticipant"/>
-    </header>
+
 
     <main>
       <section class="description">    
@@ -52,7 +52,22 @@ export default {
       this.loading = true;
       try {
         const res = await api.get('/participants');
-        this.participants = res.data;
+        let participants = res.data;
+
+        const totalParticipation = participants.reduce((sum, p) => sum + p.participation, 0);
+
+        const remainder = 100 - totalParticipation;
+
+        if (remainder > 0){
+          participants.push({
+            id: 'remainder',
+            first_name: 'Remaining',
+            last_name: 'Percentage',
+            participation: remainder
+          })
+        }
+
+        this.participants = res.data.sort((a, b) => b.participation - a.participation);
       } catch (err) {
         console.error(err);
       } finally{
@@ -128,7 +143,7 @@ main{
   font-size: 18px;
 }
 
-@media (max-width: 890px) {
+@media (max-width: 1000px) {
   .chart {
     flex-direction: column;
   }

@@ -17,7 +17,7 @@
             :style="{backgroundColor: getColor(index)}"
           ></span>
 
-          {{ participant.first_name }} {{ participant.last_name }} - {{ participant.participation }} %
+          {{ participant.participation }}% - {{ participant.first_name }} {{ participant.last_name }} 
         </li>
 
         <li v-if="totalParticipation < 100">
@@ -25,7 +25,7 @@
             class="color-box"
             :style="{backgroundColor: '#d8d8d8'}"
           ></span>
-          Empty - {{ 100 - totalParticipation }} %
+          {{ 100 - totalParticipation }}% - Empty
         </li>
       </ul>
     </div>
@@ -45,7 +45,7 @@ export default {
   },
   computed: {
     totalParticipation() {
-      return this.participants.reduce((total, percent) => total + percent.participation, 0);
+      return this.participants.reduce((total, participant) => total + participant.participation, 0);
     }
   },
   watch: {
@@ -72,7 +72,7 @@ export default {
     renderChart() {
       if (this.chart) this.chart.destroy();
       const context = this.$refs.chartCanvas.getContext('2d');
-      const data = this.participants.map(percent => percent.participation);
+      const data = this.participants.map(participant => participant.participation);
 
       if (this.totalParticipation < 100) {
         data.push(100 - this.totalParticipation);
@@ -138,7 +138,7 @@ export default {
 }
 
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .chart-container{
     width: 250px;
     height: 250px;
@@ -155,16 +155,5 @@ export default {
     height: 200px;
   }
 
-  .legend ul {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px 20px ;
-}
-
-.legend li {
-  font-size: 11px;
-  flex-direction: column;
-  align-items: center;
-}
 }
 </style>
