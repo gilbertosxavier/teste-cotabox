@@ -63,6 +63,7 @@ input{
   max-width: 250px;
   padding-inline: 10px;
   outline: none;
+  border: 0;
 }
 
 button{

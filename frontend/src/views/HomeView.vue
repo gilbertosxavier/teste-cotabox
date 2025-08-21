@@ -94,8 +94,7 @@ main{
   align-items: center;
   justify-content: center;
   gap: 16px;
-  padding: 18px;
-  margin-block: 16px;
+  padding: 30px;
   color: #4e4e4e;
 }
 
@@ -110,14 +109,13 @@ main{
 
 .chart {
   width: 100%;
-  max-width: 1080px;
+  max-width: 1280px;
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: 16px;
   padding: 18px;
-  gap: 18px;
+  gap: 50px;
 }
 
 .spinner-container {

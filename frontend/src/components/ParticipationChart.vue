@@ -112,8 +112,8 @@ export default {
 }
 
 .chart-container {
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
 }
 
 .legend ul {
@@ -148,11 +148,6 @@ export default {
 @media (max-width: 525px) {
   .chart-wrapper{
     flex-direction: column-reverse;
-  }
-
-  .chart-container{
-    width: 200px;
-    height: 200px;
   }
 
 }
