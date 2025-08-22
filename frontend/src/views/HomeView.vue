@@ -34,9 +34,9 @@
     <div v-if="showModal" class="modal-backdrop" >
       <div class="modal">
         <h2>Edit participation</h2>
-        <p>Editando a participação de {{ participantToEdit.first_name }} {{ participantToEdit.last_name }}</p>
+        <p>Editing share of {{ participantToEdit.first_name }} {{ participantToEdit.last_name }}</p>
         <div class="input-container">
-          <span>Porcentagem:</span>
+          <span>Percentage</span>
           <input type="number" v-model="editedParticipation">
         </div>
         <div class="buttons-container">
