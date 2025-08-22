@@ -99,11 +99,20 @@ export default {
       }
     },
     async handleEdit(participant) {
+      
+      if (participant._id === 'remainder') {
+        return alert('You cannot edit the remaining percentage, because it is automatic.');
+      }
+
       this.participantToEdit = participant;
       this.editedParticipation = participant.participation;
       this.showModal = true;
     },
     async handleDelete(id) {
+
+      if (id === 'remainder') {
+        return alert('You cannot delete the remaining percentage.');
+      }
 
       const confirmed = confirm('Are you sure you want to delete this participant?');
 
