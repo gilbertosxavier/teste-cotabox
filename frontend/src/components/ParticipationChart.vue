@@ -25,7 +25,7 @@
             class="color-box"
             :style="{backgroundColor: '#d8d8d8'}"
           ></span>
-          {{ 100 - totalParticipation }}% - Empty
+          {{ 100 - totalParticipation }}% - Remaining
         </li>
       </ul>
     </div>
@@ -147,7 +147,7 @@ export default {
 
 @media (max-width: 525px) {
   .chart-wrapper{
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 
 }

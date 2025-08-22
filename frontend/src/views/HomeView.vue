@@ -20,9 +20,12 @@
           <p class="no-data">You do not have any registered data yet.</p>
         </div>
         <template v-else>
-          <ParticipantsTable :participants="participants"
+          <ParticipantsTable 
+            :participants="participants"
+            :totalParticipation="totalParticipation"
             @edit="handleEdit"
             @delete="handleDelete"/>
+
           <ParticipationChart :participants="participants"/>
         </template>
       </section>
@@ -58,6 +61,7 @@ export default {
   data() {
     return {
       participants: [],
+      totalParticipation: 0,
       loading: true,
       showModal: false,
       editedParticipation: 0,
@@ -74,20 +78,13 @@ export default {
         const res = await api.get('/participants');
         let participants = res.data;
 
-        const totalParticipation = participants.reduce((sum, p) => sum + p.participation, 0);
-
-        const remainder = 100 - totalParticipation;
-
-        if (remainder > 0){
-          participants.push({
-            _id: 'remainder',
-            first_name: 'Remaining',
-            last_name: 'Percentage',
-            participation: remainder
-          })
-        }
-
+        const totalSum = participants.reduce((sum, p) => sum + p.participation, 0);
+        this.totalParticipation = totalSum;
         this.participants = res.data.sort((a, b) => b.participation - a.participation);
+
+        this.remainder = 100 - totalSum;
+        console.log(this.remainder);
+
       } catch (err) {
         console.error(err);
       } finally{

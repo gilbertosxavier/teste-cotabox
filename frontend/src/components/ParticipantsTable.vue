@@ -1,5 +1,6 @@
 <template>
-  <table class="data-table">
+  <section class="table-wrapper">
+      <table class="data-table">
     <colgroup>
       <col class="number">
       <col class="first-name">
@@ -28,13 +29,25 @@
       </tr>
     </tbody>
   </table>
+
+    <div class="legend">
+      <p v-if="totalParticipation < 100">
+        * Total share is distributed between total participant share: <strong>{{ totalParticipation }}%</strong> + total unllocated: <strong>{{ 100 - totalParticipation }}%</strong>
+      </p>
+
+      <p v-else>
+        All participation allocated: <strong>{{ totalParticipation }}%</strong>
+      </p>
+    </div>
+  </section>
+
 </template>
 
 <script>
   import { TrashIcon, PencilIcon } from  '@heroicons/vue/24/outline'
 
 export default {
-  props: ['participants'],
+  props: ['participants','totalParticipation'],
   components: {
     TrashIcon,
     PencilIcon
@@ -45,6 +58,15 @@ export default {
 
 
 <style scoped>
+
+.table-wrapper{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
 
 table, th, td {
   border: 1px solid #444;
@@ -103,4 +125,16 @@ td:first-child, th:first-child, td:last-child, th:last-child {
   width: 150px;
 }
 
+.legend {
+  font-size: 12px;
+  font-style: italic;  
+}
+
+.legend strong {
+  font-size: 14px;
+}
+
+.legend p {
+  text-align: center;
+}
 </style>

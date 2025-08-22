@@ -44,7 +44,7 @@ header {
   align-items: center;
   justify-content: center;
   background-color: #00b8e2;
-  padding-block: 16px;
+  padding: 16px;
 }
 
 form {
