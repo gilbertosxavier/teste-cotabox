@@ -24,7 +24,7 @@
         <td>{{ participant.participation }}%</td>
         <td class="actions">
           <button @click="$emit('edit', participant)"><PencilIcon class="icon icon-edit"/></button>
-          <button @click="$emit('delete', participant._id)"><TrashIcon class="icon-delete"/></button>
+          <button @click="$emit('delete', participant._id)"><TrashIcon class="icon icon-delete"/></button>
         </td>
       </tr>
     </tbody>
