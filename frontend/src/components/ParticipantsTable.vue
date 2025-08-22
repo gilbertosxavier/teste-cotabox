@@ -148,6 +148,6 @@ color: #444;
 }
 
 .icon-delete{
-  color: red;
+  color: #ff0000;
 }
 </style>
