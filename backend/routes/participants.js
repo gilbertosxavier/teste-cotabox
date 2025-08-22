@@ -42,6 +42,7 @@ router.post('/', async (req, res) => {
 router.patch('/:id', async (req, res) =>{
   const {id} = req.params;
   const {participation} = req.body;
+
   try {
     const participant = await Participant.findById(id);
     if (!participant) {

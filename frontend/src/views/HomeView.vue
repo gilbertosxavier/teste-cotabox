@@ -27,6 +27,17 @@
         </template>
       </section>
     </main>
+
+    <div v-if="showModal" class="modal-backdrop" >
+      <div class="modal">
+        <h2>Edit participation</h2>
+        <input type="number" v-model="editedParticipation">
+        <div class="buttons">
+          <button @click="saveChanges" >Save</button>
+          <button @click="showModal = false">Cancel</button>
+        </div>
+      </div>
+    </div>
     
 </template>
 
@@ -44,6 +55,9 @@ export default {
     return {
       participants: [],
       loading: true,
+      showModal: false,
+      editedParticipation: 0,
+      participantToEdit: null
     }
   },
   mounted() {
@@ -62,7 +76,7 @@ export default {
 
         if (remainder > 0){
           participants.push({
-            id: 'remainder',
+            _id: 'remainder',
             first_name: 'Remaining',
             last_name: 'Percentage',
             participation: remainder
@@ -81,22 +95,53 @@ export default {
         await api.post('/participants', participant);
         this.fetchParticipants();
       } catch (err) {
-        alert(err.response?.data?.message || 'Erro ao adicionar participante.');
+        alert(err.response?.data?.message || 'Error adding participant.');
       }
     },
     async handleEdit(participant) {
-      console.log('Edit participant:', participant);
+      this.participantToEdit = participant;
+      this.editedParticipation = participant.participation;
+      this.showModal = true;
     },
     async handleDelete(id) {
+
+      const confirmed = confirm('Are you sure you want to delete this participant?');
+
+      if (!confirmed) {
+        return;
+      }
+
       try {
         await api.delete(`/participants/${id}`);
         this.fetchParticipants();
       } catch (err) {
-        alert(err.response?.data?.message || 'Erro ao deletar participante.');
+        alert(err.response?.data?.message || 'Error deleting participant.');
       }
-    }, 
-    async handleDelete(id) {
-      console.log('Delete participant:', id);
+    },
+
+    async saveChanges(){
+      try{
+
+        const totalPercent = this.participants.reduce((acc, participant) => {
+          if (participant._id === this.participantToEdit._id || participant._id === 'remainder' ) {return acc;}
+            return acc + participant.participation;
+          
+        }, 0);
+
+        const newTotal = totalPercent + Number(this.editedParticipation);
+
+        if (newTotal > 100) {
+          return alert('Total percentage cannot exceed 100%.');
+        }
+
+        await api.patch(`/participants/${this.participantToEdit._id}`, {
+          participation: this.editedParticipation
+        });
+        this.fetchParticipants();
+        this.showModal = false;
+      }catch (error) {
+        alert(error.response?.data?.message || 'Error editing participant.');
+      }
     }
   }
 }
@@ -155,6 +200,30 @@ main{
 .no-data {
   font-weight: bold;
   font-size: 18px;
+}
+
+.modal-backdrop{
+  position: fixed;
+  inset: 0; 
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+}
+
+.modal {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center ;
+  justify-content: center;
+  gap: 16px;
+  background: #fff;
+  padding: 16px;
+  border-radius: 6px;
+
 }
 
 @media (max-width: 1000px) {
