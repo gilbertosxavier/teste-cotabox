@@ -87,7 +87,7 @@ tbody tr {
   height: 30px;
 }
 
-td:first-child, th:first-child, td:last-child, th:last-child {
+td:first-child, th:first-child, td:nth-child(4), th:nth-child(4) {
   text-align: center;
 }
 .actions {
