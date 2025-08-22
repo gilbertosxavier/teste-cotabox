@@ -23,8 +23,8 @@
         <td>{{ participant.last_name }}</td>
         <td>{{ participant.participation }}%</td>
         <td class="actions">
-          <button @click="$emit('edit', participant)"><PencilIcon class="icon"/></button>
-          <button @click="$emit('delete', participant._id)"><TrashIcon class="icon"/></button>
+          <button @click="$emit('edit', participant)"><PencilIcon class="icon icon-edit"/></button>
+          <button @click="$emit('delete', participant._id)"><TrashIcon class="icon-delete"/></button>
         </td>
       </tr>
     </tbody>
@@ -106,7 +106,7 @@ td:first-child, th:first-child, td:last-child, th:last-child {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  padding: 5px;
   height: 100%;
 }
 
@@ -136,5 +136,18 @@ td:first-child, th:first-child, td:last-child, th:last-child {
 
 .legend p {
   text-align: center;
+}
+
+.icon{
+  width: 20px;
+  height: 20px;
+}
+
+.icon-edit{
+color: #444;
+}
+
+.icon-delete{
+  color: red;
 }
 </style>
